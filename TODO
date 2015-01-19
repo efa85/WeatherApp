@@ -1,0 +1,5 @@
+add method to the communicator to fetch the image
+expose the image or the NSData in the location weather view model, or just the URL and let the view fetch it?
+add integration test for Locations view model
+add error handling for location weather view model
+Swift: Not possible to have an nested enum in a parametrized class?

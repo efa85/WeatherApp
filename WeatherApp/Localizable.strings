@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  WeatherApp
+
+  Created by Emilio Fernandez on 14/01/15.
+  Copyright (c) 2015 Emilio Fernandez. All rights reserved.
+*/
+
+LOCATIONS_TITLE = "My Locations";
+ADD_LOCATION_TITLE = "Add Location";
