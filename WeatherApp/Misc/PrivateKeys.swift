@@ -24,6 +24,6 @@ class PrivateKeys {
             }
         }
         
-        assert(false, "Could not find PrivateKeys.plist file or wrong format - copy it from PrivateKeys_TEMPLATE.plist, rename it and put your own WWO API key. Do NOT put this file under version control.")
+        assertionFailure("Could not find PrivateKeys.plist file or wrong format - copy it from PrivateKeys_TEMPLATE.plist, rename it and put your own WWO API key. Do NOT put this file under version control.")
     }
 }

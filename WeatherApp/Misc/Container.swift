@@ -56,11 +56,11 @@ class Container {
     }
     
     func resolveLocationStore() -> LocationStore {
-        return CoreDataLocationStore(context: coreDataStackManager.mainQueueContext)
+        return CoreDataLocationStore(context: coreDataStack.mainQueueContext)
     }
     
-    private lazy var coreDataStackManager: CoreDataStackManager = {
-        return CoreDataStackManager(modelName: self.configuration.modelName, storeName: self.configuration.storeName)
+    private lazy var coreDataStack: CoreDataStack = {
+        return CoreDataStack(modelName: self.configuration.modelName, type: .SQLite(storeName: self.configuration.storeName))
     }()
     
     private lazy var weatherRetriever: WeatherRetriever = {

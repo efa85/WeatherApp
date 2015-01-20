@@ -52,7 +52,8 @@ private extension LocationTableViewCell {
                 self.temperatureLabel.text = temperature + " C"
                 self.weatherDescriptionLabel.text = weatherDescription
             case .Failure(_):
-                break
+                self.temperatureLabel.text = "?"
+                self.weatherDescriptionLabel.text = "?"
             }
             
             self.hideGreyOutView()

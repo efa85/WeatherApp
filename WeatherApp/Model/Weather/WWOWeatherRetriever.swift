@@ -89,6 +89,8 @@ private extension WWOWeatherRetriever {
     
 }
 
+// TODO make it accept AnyObject instead of NSData?
+
 class WWOResponseDataParser {
     
     enum Result {

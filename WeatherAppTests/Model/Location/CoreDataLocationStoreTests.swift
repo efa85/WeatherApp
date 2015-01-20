@@ -16,27 +16,27 @@ class CoreDataLocationStoreTests: XCTestCase {
     let storeName = "TestLocations.sqlite"
     
     var sut: LocationStore!
-    var stackManager: CoreDataStackManager!
+    var coreDataStack: CoreDataStack!
     
     override func setUp() {
         super.setUp()
         
-        stackManager = CoreDataStackManager(modelName: modelName, storeName: storeName)
+        coreDataStack = CoreDataStack(modelName: modelName, type: .SQLite(storeName: storeName), substitutionSwiftModuleName:"WeatherAppTests")
         
         deleteStore()
         
-        sut = CoreDataLocationStore(context: stackManager.mainQueueContext)
+        sut = CoreDataLocationStore(context: coreDataStack.mainQueueContext)
     }
     
     override func tearDown() {
         deleteStore()
         sut = nil
-        stackManager = nil
+        coreDataStack = nil
         
         super.tearDown()
     }
-
-    func test__initially_there_are_no_locatioTODOns() {
+    
+    func test__initially_there_are_no_locations() {
         XCTAssertEqual(sut.fetchLocations().count, 0)
     }
     
@@ -72,8 +72,8 @@ class CoreDataLocationStoreTests: XCTestCase {
         
         XCTAssertEqual(sut.fetchLocations().count, 1)
         
-        stackManager = CoreDataStackManager(modelName: modelName, storeName: storeName)
-        sut = CoreDataLocationStore(context: stackManager.mainQueueContext)
+        coreDataStack = CoreDataStack(modelName: modelName, type: .SQLite(storeName: storeName), substitutionSwiftModuleName:"WeatherAppTests")
+        sut = CoreDataLocationStore(context: coreDataStack.mainQueueContext)
         
         XCTAssertEqual(sut.fetchLocations().count, 1)
 
@@ -104,7 +104,7 @@ class CoreDataLocationStoreTests: XCTestCase {
     }
     
     private func deleteStore() {
-        let storeUrl = stackManager.storeUrl
+        let storeUrl = coreDataStack.storeUrl!
         NSFileManager.defaultManager().removeItemAtURL(storeUrl, error: nil)
     }
 

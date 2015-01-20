@@ -8,7 +8,6 @@
 
 import CoreData
 
-let locationEntityName = "Location"
 let nameKey = "name"
 let latitudeKey = "latitude"
 let longitudeKey = "longitude"
@@ -22,20 +21,18 @@ class CoreDataLocationStore: LocationStore {
     }
     
     func fetchLocations() -> [Location] {
-        let fetchRequest = NSFetchRequest(entityName: locationEntityName)
+        let fetchRequest = NSFetchRequest(entityName: Location.entityName)
 
-        let result = context.executeFetchRequest(fetchRequest, error: nil) as [NSManagedObject]?
-        return result!.map() {
-            (managedObject) -> Location in
-            let name = managedObject.valueForKey(nameKey) as? String
-            let latitude = managedObject.valueForKey(latitudeKey) as? String
-            let longitude = managedObject.valueForKey(longitudeKey) as? String
-            return LocationImpl(name: name ?? "", latitude: latitude ?? "", longitude: longitude ?? "")
+        if let result = context.executeFetchRequest(fetchRequest, error: nil) as? [Location] {
+            return result
+        }
+        else {
+            return []
         }
     }
 
     func addLocationWithName(name: String, latitude: String, longitude: String) {
-        let location = NSEntityDescription.insertNewObjectForEntityForName(locationEntityName, inManagedObjectContext: context) as NSManagedObject
+        let location = NSEntityDescription.insertNewObjectForEntityForName(Location.entityName, inManagedObjectContext: context) as NSManagedObject
         location.setValue(name, forKey: nameKey)
         location.setValue(latitude, forKey: latitudeKey)
         location.setValue(longitude, forKey: longitudeKey)
@@ -44,7 +41,7 @@ class CoreDataLocationStore: LocationStore {
     }
     
     func deleteLocation(location: Location) {
-        let fetchRequest = NSFetchRequest(entityName: locationEntityName)
+        let fetchRequest = NSFetchRequest(entityName: Location.entityName)
         fetchRequest.predicate = NSPredicate(format:"%K = %@", nameKey, location.name)
         
         if let result = context.executeFetchRequest(fetchRequest, error: nil) as [NSManagedObject]? {
@@ -57,10 +54,10 @@ class CoreDataLocationStore: LocationStore {
         context.save(nil)
     }
     
-    struct LocationImpl: Location {
-        let name : String
-        let latitude : String
-        let longitude : String
-    }
+//    struct LocationImpl: Location {
+//        let name : String
+//        let latitude : String
+//        let longitude : String
+//    }
     
 }
