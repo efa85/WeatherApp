@@ -17,12 +17,15 @@ class LocationViewModelTests: XCTestCase {
     
     var sut: LocationViewModel!
     var weatherRetrieverMock: MockWeatherRetriever!
-    
+    var context: NSManagedObjectContext!
 
     override func setUp() {
         super.setUp()
         
-        let location = FakeLocation(name: locationName, latitude: latitude, longitude: longitude)
+        let coreDataStack = CoreDataStack(modelName: "Locations.momd", type: .InMemory, substitutionSwiftModuleName:"WeatherAppTests")
+        context = coreDataStack.mainQueueContext
+        
+        let location = createLocationWithName(locationName, latitude: latitude, longitude: longitude)
         weatherRetrieverMock = MockWeatherRetriever()
         sut = LocationViewModel(location:location, weatherRetriever:weatherRetrieverMock)
     }
@@ -30,7 +33,8 @@ class LocationViewModelTests: XCTestCase {
     override func tearDown() {
         weatherRetrieverMock = nil
         sut = nil
-        
+        context = nil
+
         super.tearDown()
     }
 
@@ -104,13 +108,15 @@ class LocationViewModelTests: XCTestCase {
             self.passedLongitude = longitude
             completionHandler(self.weatherResultToPassToCompletionHandler)
         }
-        
     }
     
-    struct FakeLocation: Location {
-        let name : String
-        let latitude : String
-        let longitude : String
+    private func createLocationWithName(name: String, latitude: String, longitude: String) -> Location {
+        let location = NSEntityDescription.insertNewObjectForEntityForName(Location.entityName, inManagedObjectContext: context) as Location
+        location.name = name
+        location.latitude = latitude
+        location.longitude = longitude
+        
+        return location
     }
 
 }
