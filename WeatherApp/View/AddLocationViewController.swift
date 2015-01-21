@@ -85,4 +85,9 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
         
         updateSaveButtonItemEnabled()
     }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

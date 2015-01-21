@@ -23,6 +23,7 @@
                     <textInputTraits key="textInputTraits"/>
                     <connections>
                         <action selector="nameTextFieldEditingChanged:" destination="-1" eventType="editingChanged" id="jq5-HS-Mf2"/>
+                        <outlet property="delegate" destination="-1" id="dbd-jd-5kU"/>
                     </connections>
                 </textField>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="DuM-bR-TPc">

@@ -42,7 +42,7 @@
 		95651CE91A23201400445E6D /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95651CE81A23201400445E6D /* LocationViewModel.swift */; };
 		95651CF21A24133F00445E6D /* LocationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95651CF11A24133F00445E6D /* LocationViewModelTests.swift */; };
 		95651CF31A24152B00445E6D /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95651CE81A23201400445E6D /* LocationViewModel.swift */; };
-		95A245301A5B2D6400D8A057 /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2452C1A5B2D6400D8A057 /* CoreDataStackManager.swift */; };
+		95A245301A5B2D6400D8A057 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2452C1A5B2D6400D8A057 /* CoreDataStack.swift */; };
 		95A245311A5B2D6400D8A057 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2452D1A5B2D6400D8A057 /* Location.swift */; };
 		95A245321A5B2D6400D8A057 /* CoreDataLocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2452E1A5B2D6400D8A057 /* CoreDataLocationStore.swift */; };
 		95A245331A5B2D6400D8A057 /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2452F1A5B2D6400D8A057 /* LocationStore.swift */; };
@@ -53,7 +53,7 @@
 		95A245411A5B2E9C00D8A057 /* WWOWeatherRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2453A1A5B2E3000D8A057 /* WWOWeatherRetriever.swift */; };
 		95A245421A5B2E9C00D8A057 /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2452F1A5B2D6400D8A057 /* LocationStore.swift */; };
 		95A245441A5B2E9C00D8A057 /* CoreDataLocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2452E1A5B2D6400D8A057 /* CoreDataLocationStore.swift */; };
-		95A245451A5B2E9C00D8A057 /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2452C1A5B2D6400D8A057 /* CoreDataStackManager.swift */; };
+		95A245451A5B2E9C00D8A057 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2452C1A5B2D6400D8A057 /* CoreDataStack.swift */; };
 		95A2454C1A5B8E4A00D8A057 /* unexpected.json in Resources */ = {isa = PBXBuildFile; fileRef = 95A245471A5B8E4A00D8A057 /* unexpected.json */; };
 		95A2454D1A5B8E4A00D8A057 /* nojson in Resources */ = {isa = PBXBuildFile; fileRef = 95A245481A5B8E4A00D8A057 /* nojson */; };
 		95A2454E1A5B8E4A00D8A057 /* error.json in Resources */ = {isa = PBXBuildFile; fileRef = 95A245491A5B8E4A00D8A057 /* error.json */; };
@@ -109,7 +109,7 @@
 		95651CE21A230BA000445E6D /* LocationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsViewModel.swift; sourceTree = "<group>"; };
 		95651CE81A23201400445E6D /* LocationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; usesTabs = 0; };
 		95651CF11A24133F00445E6D /* LocationViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewModelTests.swift; sourceTree = "<group>"; };
-		95A2452C1A5B2D6400D8A057 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
+		95A2452C1A5B2D6400D8A057 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		95A2452D1A5B2D6400D8A057 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		95A2452E1A5B2D6400D8A057 /* CoreDataLocationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataLocationStore.swift; sourceTree = "<group>"; };
 		95A2452F1A5B2D6400D8A057 /* LocationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStore.swift; sourceTree = "<group>"; };
@@ -213,7 +213,6 @@
 			children = (
 				95712C521A243BAE00199032 /* Model */,
 				95651CF01A24130500445E6D /* ViewModel */,
-				95651CC91A22F89300445E6D /* Supporting Files */,
 				95D1C83C1A242812003CFECF /* WeatherAppTests-Bridging-Header.h */,
 			);
 			path = WeatherAppTests;
@@ -225,6 +224,7 @@
 				95651CCA1A22F89300445E6D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		95651CD51A23053D00445E6D /* Model */ = {
@@ -264,6 +264,7 @@
 		95651CF01A24130500445E6D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				95651CC91A22F89300445E6D /* Supporting Files */,
 				951C6A211A6608E000F44CE7 /* LocationsViewModelTests.swift */,
 				95651CF11A24133F00445E6D /* LocationViewModelTests.swift */,
 				9514D0051A487028007100F1 /* LocationsViewModelIT.swift */,
@@ -287,7 +288,7 @@
 				95A2452F1A5B2D6400D8A057 /* LocationStore.swift */,
 				95A2452D1A5B2D6400D8A057 /* Location.swift */,
 				95A2452E1A5B2D6400D8A057 /* CoreDataLocationStore.swift */,
-				95A2452C1A5B2D6400D8A057 /* CoreDataStackManager.swift */,
+				95A2452C1A5B2D6400D8A057 /* CoreDataStack.swift */,
 				95A245341A5B2D8100D8A057 /* Locations.xcdatamodeld */,
 			);
 			path = Location;
@@ -487,7 +488,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95651CE31A230BA000445E6D /* LocationsViewModel.swift in Sources */,
-				95A245301A5B2D6400D8A057 /* CoreDataStackManager.swift in Sources */,
+				95A245301A5B2D6400D8A057 /* CoreDataStack.swift in Sources */,
 				95651CDE1A230B1600445E6D /* LocationsViewController.swift in Sources */,
 				952087F91A5CE86A0097B12B /* AddLocationViewModel.swift in Sources */,
 				95A245361A5B2D8100D8A057 /* Locations.xcdatamodeld in Sources */,
@@ -522,7 +523,7 @@
 				95651CF31A24152B00445E6D /* LocationViewModel.swift in Sources */,
 				95A245401A5B2E9C00D8A057 /* WeatherRetriever.swift in Sources */,
 				95403B1C1A53B0A400501D28 /* LocationsViewModel.swift in Sources */,
-				95A245451A5B2E9C00D8A057 /* CoreDataStackManager.swift in Sources */,
+				95A245451A5B2E9C00D8A057 /* CoreDataStack.swift in Sources */,
 				951DC3D21A67A4E6003AA257 /* WeatherResponse.swift in Sources */,
 				95403B211A53B13A00501D28 /* LocationTableViewCell.swift in Sources */,
 				95A245411A5B2E9C00D8A057 /* WWOWeatherRetriever.swift in Sources */,
