@@ -62,18 +62,10 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
         let tappedPoint = gestureRecognizer.locationInView(mapView)
         let coordinate = mapView.convertPoint(tappedPoint, toCoordinateFromView: mapView)
         
-        addPointAnnotationWithCoordinate(coordinate)
+        mapView.setUniquePointAnnotationWithCoordinate(coordinate)
         viewModel.coordinate = (coordinate.latitude, coordinate.longitude)
         
         updateSaveButtonItemEnabled()
-    }
-    
-    private func addPointAnnotationWithCoordinate(coordinate: CLLocationCoordinate2D) {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        
-        mapView.removeAnnotations(mapView.annotations)
-        mapView.addAnnotation(annotation)
     }
     
     private func updateSaveButtonItemEnabled() {

@@ -40,8 +40,16 @@ class LocationDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = viewModel.locationName
+        title = viewModel.title
         weatherDescriptionLabel.text = viewModel.description
+        temperatureLabel.text = viewModel.temperature
+        sunriseIndicatorLabel.text = LocalizedStrings.sunriseIndicator
+        sunriseLabel.text = viewModel.sunrise
+        sunsetIndicatorLabel.text = LocalizedStrings.sunsetIndicator
+        sunsetLabel.text = viewModel.sunset
+        
+        let coordinate = CLLocationCoordinate2DMake(viewModel.coordinate.0, viewModel.coordinate.1)
+        mapView.setUniquePointAnnotationWithCoordinate(coordinate)
     }
 
     override func didReceiveMemoryWarning() {

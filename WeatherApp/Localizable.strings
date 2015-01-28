@@ -8,3 +8,5 @@
 
 LOCATIONS_TITLE = "My Locations";
 ADD_LOCATION_TITLE = "Add Location";
+SUNSET_INDICATOR = "Sunset:";
+SUNRISE_INDICATOR = "Sunrise:";

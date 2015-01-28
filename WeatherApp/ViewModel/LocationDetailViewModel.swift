@@ -18,7 +18,8 @@ class LocationDetailViewModel {
         self.weatherResponse = weatherResponse
     }
     
-    var locationName: String {
+    // TODO Proper name? locationName or title? Should the i18n be handled in the view or view model?
+    var title: String {
         get {
             return location.name
         }
