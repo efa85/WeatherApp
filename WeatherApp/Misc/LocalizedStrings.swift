@@ -8,6 +8,17 @@
 
 import Foundation
 
+enum ELocalizedStrings {
+    case SunriseIndicator
+    case SunsetIndicator
+    
+    var string: String {
+        get {
+            return ""
+        }
+    }
+}
+
 // TODO use enum instead?
 // with an enum, it would be easier(with a switch) to test that all strings are translated in the supported languages
 class LocalizedStrings {
