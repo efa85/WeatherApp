@@ -25,28 +25,26 @@ class LocationViewModel {
         }
     }
     
-    enum RetrieveWeatherResult {
-        case Success(String, String)
-        case Failure(String)
-    }
+    private(set) var temperature: String = "-"
     
-    func retrieveWeather(completionHandler: (RetrieveWeatherResult) -> ()) {
+    private(set) var weatherDescription: String = "-"
+    
+    private(set) var detailViewModel: LocationDetailViewModel?
+    
+    func retrieveWeather(completionHandler: () -> ()) {
         self.weatherRetriever.retrieveWeatherWithLatitude(location.latitude, longitude: location.longitude) {
             switch $0 {
             case .Success(let weatherResponse):
+                self.temperature = weatherResponse.currentWeather.temperature
+                self.weatherDescription = weatherResponse.currentWeather.description
                 self.detailViewModel = LocationDetailViewModel(location: self.location, weatherResponse: weatherResponse)
-                completionHandler(.Success(
-                    weatherResponse.currentWeather.temperature,
-                    weatherResponse.currentWeather.description
-                    ))
-            case .Failure(let error):
-                let errorMessage = error.localizedDescription
-                completionHandler(.Failure(errorMessage))
-                break
+            case .Failure(_):
+                self.temperature = "?"
+                self.weatherDescription = "?"
             }
+            
+            completionHandler()
         }
     }
-    
-    private(set) var detailViewModel: LocationDetailViewModel?
     
 }

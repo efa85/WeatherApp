@@ -42,7 +42,13 @@ class LocationViewModelTests: XCTestCase {
         XCTAssertEqual(sut.locationName, locationName)
     }
     
-    func test__retrieveWeather__when_the_weather_retriever_succeed__retrieves_the_weather_for_the_given_location() {
+    func test__temperature_and_weatherDescription__initially_have_a_dash() {
+        XCTAssertEqual(sut.temperature, "-")
+        XCTAssertEqual(sut.weatherDescription, "-")
+    }
+    
+    func test__retrieveWeather__when_the_weather_retriever_succeeds__calls_the_completionHandler_and_the_temperature_and_weatherDescription_have_the_expected_value() {
+        
         // prepare
         let expectedTemperature = "temp"
         let expectedWeatherDescription = "description"
@@ -51,46 +57,37 @@ class LocationViewModelTests: XCTestCase {
         weatherRetrieverMock.weatherResultToPassToCompletionHandler = .Success(weatherResponse)
         
         // test
-        var retrievedTemperature: String!
-        var retrievedWeatherDescription: String!
+        var wasCalled = false
         sut.retrieveWeather {
-            switch $0 {
-            case let .Success(temperature, weatherDescription):
-                retrievedTemperature = temperature
-                retrievedWeatherDescription = weatherDescription
-            case .Failure(_):
-                XCTFail()
-            }
+            wasCalled = true
         }
         
         // verify
+        XCTAssertTrue(wasCalled)
         XCTAssertEqual(weatherRetrieverMock.passedLatitude, latitude)
         XCTAssertEqual(weatherRetrieverMock.passedLongitude, longitude)
-        XCTAssertEqual(retrievedTemperature, expectedTemperature)
-        XCTAssertEqual(retrievedWeatherDescription, expectedWeatherDescription)
+        XCTAssertEqual(sut.temperature, expectedTemperature)
+        XCTAssertEqual(sut.weatherDescription, expectedWeatherDescription)
     }
-    
-    func test__retrieveWeather__when_the_weather_retriever_fails__retrieves_the_error_message() {
+
+    func test__retrieveWeather__when_the_weather_retriever_fails__calls_the_completionHandler_and_the_temperature_and_weatherDescription_have_a_questionmark() {
         // prepare
         let expectedErrorDescription = "errorDescription"
         let retrieverError = NSError(domain: "test", code: 0, userInfo: [NSLocalizedDescriptionKey: expectedErrorDescription])
         weatherRetrieverMock.weatherResultToPassToCompletionHandler = .Failure(retrieverError)
         
         // test
-        var retrievedErrorDescription: String!
+        var wasCalled = false
         sut.retrieveWeather {
-            switch $0 {
-            case let .Success(_, _):
-                XCTFail()
-            case let .Failure(errorDescription):
-                retrievedErrorDescription = errorDescription
-            }
+            wasCalled = true
         }
         
         // verify
+        XCTAssertTrue(wasCalled)
         XCTAssertEqual(weatherRetrieverMock.passedLatitude, latitude)
         XCTAssertEqual(weatherRetrieverMock.passedLongitude, longitude)
-        XCTAssertEqual(retrievedErrorDescription, expectedErrorDescription)
+        XCTAssertEqual(sut.temperature, "?")
+        XCTAssertEqual(sut.weatherDescription, "?")
     }
     
     class MockWeatherRetriever: WeatherRetriever {

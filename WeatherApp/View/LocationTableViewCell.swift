@@ -35,36 +35,30 @@ class LocationTableViewCell: UITableViewCell {
 
 private extension LocationTableViewCell {
     
-    private func updateContent() {
+    func updateContent() {
         self.showGreyOutView()
         
         self.locationNameLabel.text = self.viewModel.locationName
-        // TODO retain cycle?
+        updateWeatherLabels()
         
-        self.temperatureLabel.text = "-"
-        self.weatherDescriptionLabel.text = "-"
-        
-        self.viewModel.retrieveWeather { [unowned self] (result) in
-            switch result {
-            case let .Success(temperature, weatherDescription):
-                println("Received temp: \(temperature) desc: \(weatherDescription)")
-                self.temperatureLabel.text = temperature + " C"
-                self.weatherDescriptionLabel.text = weatherDescription
-            case .Failure(_):
-                self.temperatureLabel.text = "?"
-                self.weatherDescriptionLabel.text = "?"
-            }
+        self.viewModel.retrieveWeather { [unowned self] () in
+            self.updateWeatherLabels()
             
             self.hideGreyOutView()
         }
     }
     
-    private func showGreyOutView() {
+    func updateWeatherLabels() {
+        self.temperatureLabel.text = self.viewModel.temperature
+        self.weatherDescriptionLabel.text = self.viewModel.weatherDescription
+    }
+    
+    func showGreyOutView() {
         self.activityIndicator.startAnimating()
         self.greyOutView.hidden = false
     }
     
-    private func hideGreyOutView() {
+    func hideGreyOutView() {
         self.activityIndicator.stopAnimating()
         self.greyOutView.hidden = true
     }
