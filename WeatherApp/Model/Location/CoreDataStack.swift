@@ -8,9 +8,6 @@
 
 import CoreData
 
-// TODO designated initializer should accept a model, type and substitution module name
-// TODO add convenience methods for the rest of the cases(just model name), model name and
-
 class CoreDataStack {
     
     let modelName: String
