@@ -18,7 +18,7 @@ class WWOWeatherRetrieverTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        let configuration = WWOWeatherRetriever.Configuration(baseUrl: NSURL(string: self.baseUrl)!, apiKey: apiKey)
+        let configuration = WWOWeatherRetriever.Configuration(baseUrl: NSURL(string: self.baseUrl)!, apiV2Key: apiKey)
         let responseDataParser = WWOResponseDataParser()
         sut = WWOWeatherRetriever(configuration: configuration, responseDataParser: responseDataParser)
     }

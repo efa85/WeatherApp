@@ -12,7 +12,7 @@ class Container {
     
     struct Configuration {
         let wwoBaseUrl: String
-        let wwoApiKey: String
+        let wwoApiV2Key: String
         let modelName: String
         let storeName: String
     }
@@ -70,7 +70,7 @@ class Container {
     
     func resolveWWOConfiguration() -> WWOWeatherRetriever.Configuration {
         let baseUrl = NSURL(string: configuration.wwoBaseUrl)!
-        return WWOWeatherRetriever.Configuration(baseUrl: baseUrl, apiKey: configuration.wwoApiKey)
+        return WWOWeatherRetriever.Configuration(baseUrl: baseUrl, apiV2Key: configuration.wwoApiV2Key)
     }
     
     func resolveResponseDataParser() -> WWOResponseDataParser {

@@ -18,7 +18,7 @@ class WWOWeatherRetriever: WeatherRetriever {
     
     struct Configuration {
         let baseUrl: NSURL
-        let apiKey: String
+        let apiV2Key: String
     }
     
     private let configuration: Configuration
@@ -54,7 +54,7 @@ private extension WWOWeatherRetriever {
         urlComponents.queryItems = [
             NSURLQueryItem(name: "q", value: urlEncodedLocation),
             NSURLQueryItem(name: "format", value: "json"),
-            NSURLQueryItem(name: "key", value: self.configuration.apiKey)
+            NSURLQueryItem(name: "key", value: self.configuration.apiV2Key)
         ]
         return urlComponents.URL!
     }

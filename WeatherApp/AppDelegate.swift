@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let configuration = Container.Configuration(
             wwoBaseUrl: "http://api.worldweatheronline.com/free/v2/weather.ashx",
-            wwoApiKey: PrivateKeys.wwoApiKey,
+            wwoApiV2Key: PrivateKeys.wwoApiKey,
             modelName: "Locations.momd",
             storeName: "testStore.sqlite"
         )

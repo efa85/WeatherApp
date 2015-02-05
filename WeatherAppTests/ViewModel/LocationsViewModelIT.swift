@@ -21,7 +21,7 @@ class LocationsViewModelIT: XCTestCase {
         
         let configuration = Container.Configuration(
             wwoBaseUrl: baseUrl,
-            wwoApiKey: apiKey,
+            wwoApiV2Key: apiKey,
             modelName: "Locations",
             storeName: "testStore.sqlite"
         )
