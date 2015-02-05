@@ -47,7 +47,6 @@ private extension LocationTableViewCell {
         self.viewModel.retrieveWeather { [unowned self] (result) in
             switch result {
             case let .Success(temperature, weatherDescription):
-                println("isMainThread: \(NSThread.isMainThread())")
                 println("Received temp: \(temperature) desc: \(weatherDescription)")
                 self.temperatureLabel.text = temperature + " C"
                 self.weatherDescriptionLabel.text = weatherDescription
