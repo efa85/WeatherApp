@@ -97,7 +97,7 @@ class AddLocationViewModelTests: XCTestCase {
         }
     }
     
-    func test__isInputValid_initially__is_false() {
+    func test__isInputValid__initially__is_false() {
         // prepare
         
         // test
@@ -107,7 +107,7 @@ class AddLocationViewModelTests: XCTestCase {
         XCTAssertFalse(isInputValid)
     }
     
-    func test__isInputValid_with_valid_name_and_coordinates_set__is_true() {
+    func test__isInputValid__with_valid_name_and_coordinates_set__is_true() {
         // prepare
         sut.name = "valid name"
         sut.coordinate = (1.0, 2.0)
@@ -119,7 +119,7 @@ class AddLocationViewModelTests: XCTestCase {
         XCTAssertTrue(isInputValid)
     }
     
-    func test__isInputValid_with_valid_name_and_coordinates_not_set__is_false() {
+    func test__isInputValid__with_valid_name_and_coordinates_not_set__is_false() {
         // prepare
         sut.name = "valid name"
         

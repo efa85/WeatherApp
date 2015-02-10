@@ -42,14 +42,13 @@ class Container {
     }
     
     func resolveLocationViewModelProvider() -> (location: Location) -> (LocationViewModel) {
-        return { (location) in
+        return { location in
             return LocationViewModel(location: location, weatherRetriever: self.weatherRetriever)// TODO retain cycle?
         }
     }
     
     func resolveAddLocationViewControllerProvider() -> () -> (AddLocationViewController) {
-        return { [unowned self]
-            () in
+        return { [unowned self] in
             let viewModel = AddLocationViewModel(locationStore: self.resolveLocationStore())
             return AddLocationViewController(viewModel: viewModel)
         }

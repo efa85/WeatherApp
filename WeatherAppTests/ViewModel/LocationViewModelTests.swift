@@ -48,7 +48,6 @@ class LocationViewModelTests: XCTestCase {
     }
     
     func test__retrieveWeather__when_the_weather_retriever_succeeds__calls_the_completionHandler_and_the_temperature_and_weatherDescription_have_the_expected_value() {
-        
         // prepare
         let expectedTemperature = "temp"
         let expectedWeatherDescription = "description"
@@ -101,9 +100,9 @@ class LocationViewModelTests: XCTestCase {
         }
         
         func retrieveWeatherWithLatitude(latitude: String, longitude: String, completionHandler: (WeatherResult) -> ()) {
-            self.passedLatitude = latitude
-            self.passedLongitude = longitude
-            completionHandler(self.weatherResultToPassToCompletionHandler)
+            passedLatitude = latitude
+            passedLongitude = longitude
+            completionHandler(weatherResultToPassToCompletionHandler)
         }
     }
     

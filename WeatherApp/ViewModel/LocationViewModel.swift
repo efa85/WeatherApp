@@ -21,7 +21,7 @@ class LocationViewModel {
     
     var locationName: String {
         get {
-            return self.location.name
+            return location.name
         }
     }
     
@@ -32,7 +32,7 @@ class LocationViewModel {
     private(set) var detailViewModel: LocationDetailViewModel?
     
     func retrieveWeather(completionHandler: () -> ()) {
-        self.weatherRetriever.retrieveWeatherWithLatitude(location.latitude, longitude: location.longitude) {
+        weatherRetriever.retrieveWeatherWithLatitude(location.latitude, longitude: location.longitude) {
             switch $0 {
             case .Success(let weatherResponse):
                 self.temperature = weatherResponse.currentWeather.temperature

@@ -30,7 +30,7 @@ class LocationsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = LocalizedStrings.locationsTitle
+        title = "My Locations"
         
         addAddLocationButtonItem()
 
@@ -41,9 +41,9 @@ class LocationsViewController: UITableViewController {
 
     private func configureTableView() {
         let cellNib = UINib(nibName:"LocationTableViewCell", bundle:nil)
-        tableView.registerNib(cellNib, forCellReuseIdentifier: LocationTableViewCell.cellIdentifier())
+        tableView.registerNib(cellNib, forCellReuseIdentifier: LocationTableViewCell.cellIdentifier)
 
-        tableView.rowHeight = LocationTableViewCell.heigh()
+        tableView.rowHeight = LocationTableViewCell.heigh
 
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refresh", forControlEvents:.ValueChanged)
@@ -51,7 +51,7 @@ class LocationsViewController: UITableViewController {
     }
     
     private func addAddLocationButtonItem() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem:.Add, target: self, action: "addButtonPressed")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem:.Add, target: self, action: "addButtonPressed")
     }
     
     private dynamic func refresh() {
@@ -61,7 +61,7 @@ class LocationsViewController: UITableViewController {
     
     private dynamic func addButtonPressed() {
         let addLocationViewController = addLocationViewControllerProvider()
-        self.navigationController!.pushViewController(addLocationViewController, animated: true)
+        navigationController!.pushViewController(addLocationViewController, animated: true)
     }
     
     // MARK: - Table view data source
@@ -75,7 +75,7 @@ class LocationsViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(LocationTableViewCell.cellIdentifier(), forIndexPath: indexPath) as LocationTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(LocationTableViewCell.cellIdentifier, forIndexPath: indexPath) as LocationTableViewCell
 
         let locationViewModel = viewModel.locationViewModelForIndex(indexPath.row)
         
@@ -99,7 +99,7 @@ class LocationsViewController: UITableViewController {
         if editingStyle == .Delete {
             // Delete the row from the data source
             viewModel.deleteLocationAtIndex(indexPath.row)
-            self.tableView.reloadData()
+            tableView.reloadData()
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
@@ -111,7 +111,7 @@ class LocationsViewController: UITableViewController {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as LocationTableViewCell
         if let locationDetailViewModel = cell.viewModel.detailViewModel {
             let locationDetailViewController = LocationDetailViewController(viewModel: locationDetailViewModel)
-            self.navigationController!.pushViewController(locationDetailViewController, animated: true)
+            navigationController!.pushViewController(locationDetailViewController, animated: true)
         }
     }
 

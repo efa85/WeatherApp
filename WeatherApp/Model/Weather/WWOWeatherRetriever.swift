@@ -34,11 +34,11 @@ class WWOWeatherRetriever: WeatherRetriever {
     }
     
     func retrieveWeatherWithLatitude(latitude: String, longitude: String, completionHandler: (WeatherResult) -> ()) {
-        let request = NSURLRequest(URL:self.weatherURLWithLatitude(latitude, longitude: longitude))
-        let callerQueue = NSOperationQueue.currentQueue()!
+        let request = NSURLRequest(URL:weatherURLWithLatitude(latitude, longitude: longitude))
         
-        let task = self.urlSession.dataTaskWithRequest(request) { [unowned self] (data, response, error) -> Void in
-            self.handleData(data, response: response, connectionError: error, completionHandler: completionHandler, callerQueue: callerQueue)
+        let task = urlSession.dataTaskWithRequest(request) { [unowned self] (data, response, error) in
+            let result = self.weatherResultWithData(data, response: response, connectionError: error)
+            completionHandler(result)
         }
         
         task.resume()
@@ -59,31 +59,23 @@ private extension WWOWeatherRetriever {
         return urlComponents.URL!
     }
     
-    private func handleData(
+    private func weatherResultWithData(
         data: NSData!,
         response: NSURLResponse!,
-        connectionError: NSError!,
-        completionHandler: ((result: WeatherResult) -> ())!,
-        callerQueue: NSOperationQueue) {
-        var result: WeatherResult!
+        connectionError: NSError!) -> WeatherResult {
         
         if let connectionError = connectionError {
-            result = .Failure(connectionError)
-        } else if let response = response {
-            let parserResult = self.responseDataParser.parse(data)
-            switch parserResult {
-            case let .ContainsWeather(weather):
-                result = .Success(weather)
-            case let .ErrorMessage(errorMessage):
-                let error = NSError(domain: WWOWeatherRetrieverDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: errorMessage])
-                result = .Failure(error)
-            case let .ParsingError(error):
-                result = .Failure(error)
-            }
+            return .Failure(connectionError)
         }
             
-        dispatch_async(callerQueue.underlyingQueue) { () -> Void in
-            completionHandler(result: result)
+        switch self.responseDataParser.parse(data) {
+        case let .ContainsWeather(weather):
+            return .Success(weather)
+        case let .ErrorMessage(errorMessage):
+            let error = NSError(domain: WWOWeatherRetrieverDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+            return .Failure(error)
+        case let .ParsingError(error):
+            return .Failure(error)
         }
     }
     
@@ -117,27 +109,32 @@ class WWOResponseDataParser {
                     }
                 }
                 
-                let currentConditions = dataPart["current_condition"] as NSArray
-                let currentCondition = currentConditions[0] as NSDictionary
-                let temperature = currentCondition["temp_C"] as String
-                let weatherDescs = currentCondition["weatherDesc"] as NSArray
-                let weatherDesc = weatherDescs[0].objectForKey("value") as String
-                let iconURLs = currentCondition["weatherIconUrl"] as NSArray
-                let iconURL = iconURLs[0].objectForKey("value") as String
-                
-                let currentWeather = Weather(temperature: temperature, description: weatherDesc, iconURL: iconURL)
-                
-                let weatherArray = dataPart["weather"] as NSArray
-                let firstWeather = weatherArray[0] as NSDictionary
-                let astronomyArray = firstWeather["astronomy"] as NSArray
-                let astronomyJsonObject = astronomyArray[0] as NSDictionary
-                let sunrise = astronomyJsonObject["sunrise"] as String
-                let sunset = astronomyJsonObject["sunset"] as String
-                
-                let astronomy = Astronomy(sunrise: sunrise, sunset: sunset)
-                
-                let weartherResponse = WeatherResponse(currentWeather: currentWeather, astronomy: astronomy)
-                return .ContainsWeather(weartherResponse)
+                if let currentConditions = dataPart["current_condition"] as? NSArray {
+                    if let currentCondition = currentConditions[0] as? NSDictionary {
+                        if let temperature = currentCondition["temp_C"] as? String {
+                            if let weatherDescs = currentCondition["weatherDesc"] as? NSArray {
+                                if let weatherDesc = weatherDescs[0].objectForKey("value") as? String {
+                                    let iconURLs = currentCondition["weatherIconUrl"] as NSArray
+                                    let iconURL = iconURLs[0].objectForKey("value") as String
+                                    
+                                    let currentWeather = Weather(temperature: temperature, description: weatherDesc, iconURL: iconURL)
+                                    
+                                    let weatherArray = dataPart["weather"] as NSArray
+                                    let firstWeather = weatherArray[0] as NSDictionary
+                                    let astronomyArray = firstWeather["astronomy"] as NSArray
+                                    let astronomyJsonObject = astronomyArray[0] as NSDictionary
+                                    let sunrise = astronomyJsonObject["sunrise"] as String
+                                    let sunset = astronomyJsonObject["sunset"] as String
+                                    
+                                    let astronomy = Astronomy(sunrise: sunrise, sunset: sunset)
+                                    
+                                    let weartherResponse = WeatherResponse(currentWeather: currentWeather, astronomy: astronomy)
+                                    return .ContainsWeather(weartherResponse)
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         

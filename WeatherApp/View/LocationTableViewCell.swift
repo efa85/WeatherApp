@@ -10,20 +10,21 @@ import UIKit
 
 class LocationTableViewCell: UITableViewCell {
 
-    class func heigh() -> CGFloat {
-        return 127
+    class var heigh: CGFloat {
+        get {
+            return 78
+        }
     }
     
-    class func cellIdentifier() -> String {
-        return "CellId"
+    class var cellIdentifier: String {
+        get {
+            return "LocationCellId"
+        }
     }
     
     @IBOutlet weak var locationNameLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var weatherDescriptionLabel: UILabel!
-    @IBOutlet weak var weatheriIconImageView: UIImageView!
-    @IBOutlet weak var greyOutView: UIView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var viewModel: LocationViewModel! {
         didSet {
@@ -36,31 +37,19 @@ class LocationTableViewCell: UITableViewCell {
 private extension LocationTableViewCell {
     
     func updateContent() {
-        self.showGreyOutView()
-        
-        self.locationNameLabel.text = self.viewModel.locationName
+        locationNameLabel.text = viewModel.locationName
         updateWeatherLabels()
         
-        self.viewModel.retrieveWeather { [unowned self] () in
-            self.updateWeatherLabels()
-            
-            self.hideGreyOutView()
+        viewModel.retrieveWeather { [unowned self] in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.updateWeatherLabels()
+            }
         }
     }
     
     func updateWeatherLabels() {
-        self.temperatureLabel.text = self.viewModel.temperature
-        self.weatherDescriptionLabel.text = self.viewModel.weatherDescription
-    }
-    
-    func showGreyOutView() {
-        self.activityIndicator.startAnimating()
-        self.greyOutView.hidden = false
-    }
-    
-    func hideGreyOutView() {
-        self.activityIndicator.stopAnimating()
-        self.greyOutView.hidden = true
+        temperatureLabel.text = viewModel.temperature
+        weatherDescriptionLabel.text = viewModel.weatherDescription
     }
 
 }

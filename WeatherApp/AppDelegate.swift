@@ -33,10 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Override point for customization after application launch.
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        self.window!.rootViewController = self.container.resolveRootViewController()
-        self.window!.makeKeyAndVisible()
+        window!.rootViewController = container.resolveRootViewController()
+        window!.makeKeyAndVisible()
         return true
     }
 

@@ -23,7 +23,6 @@
 		952087FA1A5CE89A0097B12B /* AddLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952087F81A5CE86A0097B12B /* AddLocationViewModel.swift */; };
 		952234A71A79059B004070C4 /* MapViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952234A61A79059B004070C4 /* MapViewExtensions.swift */; };
 		952234A81A79059B004070C4 /* MapViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952234A61A79059B004070C4 /* MapViewExtensions.swift */; };
-		953D28AC1A6637BA00E7D469 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 953D28AB1A6637BA00E7D469 /* Localizable.strings */; };
 		953D28B11A6661E000E7D469 /* PrivateKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 953D28B01A6661E000E7D469 /* PrivateKeys.plist */; };
 		95403B1C1A53B0A400501D28 /* LocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95651CE21A230BA000445E6D /* LocationsViewModel.swift */; };
 		95403B1F1A53B11800501D28 /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95651CDD1A230B1600445E6D /* LocationsViewController.swift */; };
@@ -62,10 +61,8 @@
 		95A2454F1A5B8E4A00D8A057 /* weather.json in Resources */ = {isa = PBXBuildFile; fileRef = 95A2454A1A5B8E4A00D8A057 /* weather.json */; };
 		95A245501A5B8E4A00D8A057 /* WWOWeatherRetrieverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2454B1A5B8E4A00D8A057 /* WWOWeatherRetrieverTests.swift */; };
 		95A245531A5B8E9900D8A057 /* CoreDataLocationStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A245521A5B8E9900D8A057 /* CoreDataLocationStoreTests.swift */; };
-		95BFAB481A6CE1A300A1FE4B /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BFAB451A6CE1A300A1FE4B /* LocalizedStrings.swift */; };
 		95BFAB491A6CE1A300A1FE4B /* PrivateKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BFAB461A6CE1A300A1FE4B /* PrivateKeys.swift */; };
 		95BFAB4A1A6CE1A300A1FE4B /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BFAB471A6CE1A300A1FE4B /* Container.swift */; };
-		95BFAB4B1A6CE1B200A1FE4B /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BFAB451A6CE1A300A1FE4B /* LocalizedStrings.swift */; };
 		95BFAB4C1A6CE1B200A1FE4B /* PrivateKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BFAB461A6CE1A300A1FE4B /* PrivateKeys.swift */; };
 		95BFAB4D1A6CE1B200A1FE4B /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BFAB471A6CE1A300A1FE4B /* Container.swift */; };
 /* End PBXBuildFile section */
@@ -94,7 +91,6 @@
 		952087F61A5CE8430097B12B /* AddLocationViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewModelTests.swift; sourceTree = "<group>"; };
 		952087F81A5CE86A0097B12B /* AddLocationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewModel.swift; sourceTree = "<group>"; };
 		952234A61A79059B004070C4 /* MapViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewExtensions.swift; sourceTree = "<group>"; };
-		953D28AB1A6637BA00E7D469 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		953D28B01A6661E000E7D469 /* PrivateKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PrivateKeys.plist; sourceTree = "<group>"; };
 		95403B221A5445AD00501D28 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		95406E681A63C3D100BD86BD /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
@@ -125,7 +121,6 @@
 		95A2454A1A5B8E4A00D8A057 /* weather.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weather.json; sourceTree = "<group>"; };
 		95A2454B1A5B8E4A00D8A057 /* WWOWeatherRetrieverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WWOWeatherRetrieverTests.swift; sourceTree = "<group>"; };
 		95A245521A5B8E9900D8A057 /* CoreDataLocationStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataLocationStoreTests.swift; sourceTree = "<group>"; };
-		95BFAB451A6CE1A300A1FE4B /* LocalizedStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
 		95BFAB461A6CE1A300A1FE4B /* PrivateKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateKeys.swift; sourceTree = "<group>"; };
 		95BFAB471A6CE1A300A1FE4B /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		95BFAB4E1A6CE35000A1FE4B /* PrivateKeys_TEMPLATE.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivateKeys_TEMPLATE.plist; sourceTree = "<group>"; };
@@ -193,7 +188,6 @@
 				95651CD51A23053D00445E6D /* Model */,
 				95BFAB441A6CE10400A1FE4B /* Misc */,
 				95651CB51A22F89300445E6D /* AppDelegate.swift */,
-				953D28AB1A6637BA00E7D469 /* Localizable.strings */,
 				953D28B01A6661E000E7D469 /* PrivateKeys.plist */,
 				95BFAB4E1A6CE35000A1FE4B /* PrivateKeys_TEMPLATE.plist */,
 				95651CBC1A22F89300445E6D /* Images.xcassets */,
@@ -332,7 +326,6 @@
 			children = (
 				95BFAB471A6CE1A300A1FE4B /* Container.swift */,
 				95BFAB461A6CE1A300A1FE4B /* PrivateKeys.swift */,
-				95BFAB451A6CE1A300A1FE4B /* LocalizedStrings.swift */,
 				952234A61A79059B004070C4 /* MapViewExtensions.swift */,
 			);
 			path = Misc;
@@ -431,7 +424,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9505E44C1A67AD8300E06083 /* LocationDetailViewController.xib in Resources */,
-				953D28AC1A6637BA00E7D469 /* Localizable.strings in Resources */,
 				95651CC01A22F89300445E6D /* LaunchScreen.xib in Resources */,
 				953D28B11A6661E000E7D469 /* PrivateKeys.plist in Resources */,
 				95651CDC1A23079400445E6D /* LocationTableViewCell.xib in Resources */,
@@ -510,7 +502,6 @@
 				95A245321A5B2D6400D8A057 /* CoreDataLocationStore.swift in Sources */,
 				95A245311A5B2D6400D8A057 /* Location.swift in Sources */,
 				95BFAB4A1A6CE1A300A1FE4B /* Container.swift in Sources */,
-				95BFAB481A6CE1A300A1FE4B /* LocalizedStrings.swift in Sources */,
 				95651CB61A22F89300445E6D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,7 +533,6 @@
 				9505E44D1A67BDC400E06083 /* LocationDetailViewModel.swift in Sources */,
 				95A245531A5B8E9900D8A057 /* CoreDataLocationStoreTests.swift in Sources */,
 				95406E6C1A63C51900BD86BD /* AddLocationViewController.swift in Sources */,
-				95BFAB4B1A6CE1B200A1FE4B /* LocalizedStrings.swift in Sources */,
 				95403B1F1A53B11800501D28 /* LocationsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

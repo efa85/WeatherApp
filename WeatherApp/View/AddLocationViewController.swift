@@ -29,7 +29,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = LocalizedStrings.addLocationTitle
+        title = "Add Location"
         
         addSaveButtonItem()
         addMapTapViewGestureRecognizer()
@@ -38,13 +38,13 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func addSaveButtonItem() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem:.Save, target: self, action: "saveButtonPressed")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem:.Save, target: self, action: "saveButtonPressed")
     }
     
     private dynamic func saveButtonPressed() {
         switch viewModel.addLocation() {
         case .Success:
-            self.navigationController!.popViewControllerAnimated(false)
+            navigationController!.popViewControllerAnimated(false)
         case .Error:
             break
         }
@@ -69,7 +69,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func updateSaveButtonItemEnabled() {
-        self.navigationItem.rightBarButtonItem?.enabled = viewModel.isInputValid
+        navigationItem.rightBarButtonItem?.enabled = viewModel.isInputValid
     }
     
     @IBAction func nameTextFieldEditingChanged(sender: AnyObject) {

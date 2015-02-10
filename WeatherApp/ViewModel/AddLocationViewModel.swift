@@ -6,10 +6,6 @@
 //  Copyright (c) 2015 Emilio Fernandez. All rights reserved.
 //
 
-//import Foundation
-
-
-
 class AddLocationViewModel {
     
     private let locationStore: LocationStore

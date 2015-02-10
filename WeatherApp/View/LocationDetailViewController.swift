@@ -43,9 +43,9 @@ class LocationDetailViewController: UIViewController {
         title = viewModel.title
         weatherDescriptionLabel.text = viewModel.description
         temperatureLabel.text = viewModel.temperature
-        sunriseIndicatorLabel.text = LocalizedStrings.sunriseIndicator
+        sunriseIndicatorLabel.text = "Sunrise"
         sunriseLabel.text = viewModel.sunrise
-        sunsetIndicatorLabel.text = LocalizedStrings.sunsetIndicator
+        sunsetIndicatorLabel.text = "Sunset"
         sunsetLabel.text = viewModel.sunset
         
         let coordinate = CLLocationCoordinate2DMake(viewModel.coordinate.0, viewModel.coordinate.1)
