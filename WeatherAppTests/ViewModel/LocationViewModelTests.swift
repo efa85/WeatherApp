@@ -22,7 +22,7 @@ class LocationViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        let coreDataStack = CoreDataStack(modelName: "Locations.momd", type: .InMemory, substitutionSwiftModuleName:"WeatherAppTests")
+        let coreDataStack = CoreDataStack.withModelName("Locations.momd", storeType: .InMemory, substitutionSwiftModuleName:"WeatherAppTests")
         context = coreDataStack.mainQueueContext
         
         let location = createLocationWithName(locationName, latitude: latitude, longitude: longitude)

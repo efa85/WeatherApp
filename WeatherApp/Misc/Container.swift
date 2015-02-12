@@ -43,7 +43,7 @@ class Container {
     
     func resolveLocationViewModelProvider() -> (location: Location) -> (LocationViewModel) {
         return { location in
-            return LocationViewModel(location: location, weatherRetriever: self.weatherRetriever)// TODO retain cycle?
+            return LocationViewModel(location: location, weatherRetriever: self.weatherRetriever)// TODO: retain cycle?
         }
     }
     
@@ -59,7 +59,7 @@ class Container {
     }
     
     private lazy var coreDataStack: CoreDataStack = {
-        return CoreDataStack(modelName: self.configuration.modelName, type: .SQLite(storeName: self.configuration.storeName))
+        return CoreDataStack.withModelName(self.configuration.modelName, storeType: .SQLite(storeName: self.configuration.storeName))
     }()
     
     private lazy var weatherRetriever: WeatherRetriever = {

@@ -10,11 +10,10 @@ import CoreData
 
 class CoreDataStack {
     
-    let modelName: String
-    let type: Type
-    let substitutionSwiftModuleName: String?
+    let model: NSManagedObjectModel
+    let storeType: StoreType
     
-    enum Type {
+    enum StoreType {
         case SQLite(storeName: String)
         case InMemory
         
@@ -30,31 +29,14 @@ class CoreDataStack {
         }
     }
     
-    /**
-    @param modelName the name of the model with .momd extension. Example: "MyModel.momd"
-    @param storeName the name of the sqlite store. Example: "MyStore.sqlite"
-    @param substitutionSwiftModuleName the substitution Swift module name to use in the entity's managedObjectClassName, or nil if we do not want any substitution
-    */
-    init(modelName: String, type: Type, substitutionSwiftModuleName: String? = nil) {
-        self.modelName = modelName
-        self.type = type
-        self.substitutionSwiftModuleName = substitutionSwiftModuleName
+    init(model: NSManagedObjectModel, storeType: StoreType) {
+        self.model = model
+        self.storeType = storeType
     }
-    
-    private(set) lazy var model: NSManagedObjectModel = {
-        let model = NSManagedObjectModel(contentsOfURL: self.modelUrl)!
-        
-        if let substitutionSwiftModuleName = self.substitutionSwiftModuleName {
-            return self.modelByChangingEntitiyManagedObjectClassNameSwiftModuleName(substitutionSwiftModuleName, originalModel: model)
-        }
-        else {
-            return model
-        }
-    }()
     
     private(set) lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.model)
-        persistentStoreCoordinator.addPersistentStoreWithType(self.type.persistentStoreType, configuration: nil, URL: self.storeUrl, options: nil, error: nil)
+        persistentStoreCoordinator.addPersistentStoreWithType(self.storeType.persistentStoreType, configuration: nil, URL: self.storeUrl, options: nil, error: nil)
         
         
         return persistentStoreCoordinator
@@ -68,9 +50,9 @@ class CoreDataStack {
     }()
     
     private(set) lazy var storeUrl: NSURL? = {
-        switch self.type {
+        switch self.storeType {
         case .SQLite(let storeName):
-            // TODO in documents?
+            // TODO: in documents?
             let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
             let documentsUrl = NSURL(fileURLWithPath: documentsPath)!
             return documentsUrl.URLByAppendingPathComponent(storeName)
@@ -79,14 +61,34 @@ class CoreDataStack {
         }
     }()
     
-    private(set) lazy var modelUrl: NSURL = {
-        return NSBundle.mainBundle().URLForResource(self.modelName, withExtension: nil)!
-    }()
+}
+
+extension CoreDataStack {
+    
+    // TODO: make this a convenience initializer
+    class func withModelName(modelName: String, storeType: StoreType, substitutionSwiftModuleName: String? = nil) -> CoreDataStack {
+        let modelUrl = NSBundle.mainBundle().URLForResource(modelName, withExtension: nil)!
+        let model = NSManagedObjectModel(contentsOfURL: modelUrl)!
+        return CoreDataStack(
+            model: substituteSwiftModuleNameIfNeededWithPrefix(substitutionSwiftModuleName, model: model),
+            storeType: storeType
+        )
+    }
     
 }
 
 private extension CoreDataStack {
-    func modelByChangingEntitiyManagedObjectClassNameSwiftModuleName(moduleName: String, originalModel: NSManagedObjectModel) -> NSManagedObjectModel {
+    
+    class func substituteSwiftModuleNameIfNeededWithPrefix(prefix: String?, model: NSManagedObjectModel) -> NSManagedObjectModel {
+        if let prefix = prefix {
+            return modelByChangingEntitiyManagedObjectClassNameSwiftModuleName(prefix, originalModel: model)
+        }
+        else {
+            return model
+        }
+    }
+    
+    class func modelByChangingEntitiyManagedObjectClassNameSwiftModuleName(moduleName: String, originalModel: NSManagedObjectModel) -> NSManagedObjectModel {
         let model = NSManagedObjectModel(byMergingModels: [originalModel])!
         for entity in model.entities as [NSEntityDescription] {
             let originalManagedObjectClassName = entity.managedObjectClassName
@@ -100,4 +102,5 @@ private extension CoreDataStack {
         
         return model
     }
+    
 }

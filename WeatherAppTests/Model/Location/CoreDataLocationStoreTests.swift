@@ -21,7 +21,7 @@ class CoreDataLocationStoreTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        coreDataStack = CoreDataStack(modelName: modelName, type: .SQLite(storeName: storeName), substitutionSwiftModuleName:"WeatherAppTests")
+        coreDataStack = CoreDataStack.withModelName(modelName, storeType: .SQLite(storeName: storeName), substitutionSwiftModuleName:"WeatherAppTests")
         
         deleteStore()
         
@@ -72,7 +72,7 @@ class CoreDataLocationStoreTests: XCTestCase {
         
         XCTAssertEqual(sut.fetchLocations().count, 1)
         
-        coreDataStack = CoreDataStack(modelName: modelName, type: .SQLite(storeName: storeName), substitutionSwiftModuleName:"WeatherAppTests")
+        coreDataStack = CoreDataStack.withModelName(modelName, storeType: .SQLite(storeName: storeName), substitutionSwiftModuleName:"WeatherAppTests")
         sut = CoreDataLocationStore(context: coreDataStack.mainQueueContext)
         
         XCTAssertEqual(sut.fetchLocations().count, 1)
